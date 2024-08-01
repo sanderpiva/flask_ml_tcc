@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Classificador de Evasão Estudantil</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+  <div class="login">
+    <h1>Classificador de Evasão Estudantil BSI: IFSULMINAS - MACHADO/MG</h1>
+    <form id="classifyForm" action="{{ url_for('predict')}}" method="post">
+      <div class="radio-container">
+        <label>INTERNET EM CASA?: </label>
+        <input type="radio" name="ACESSO_INTERNET" value="1" required="required"> Sim
+        <input type="radio" name="ACESSO_INTERNET" value="0" required="required"> Não
+      </div>
+      <div class="radio-container">
+        <label>I.R.A. >= QUE 6?: </label>
+        <input type="radio" name="I.R.A." value="1" required="required"> Sim
+        <input type="radio" name="I.R.A." value="0" required="required"> Não
+      </div>
+      <div class="radio-container">
+        <label>ETNIA BRANCA?: </label>
+        <input type="radio" name="ETNIA" value="1" required="required"> Sim
+        <input type="radio" name="ETNIA" value="0" required="required"> Não
+      </div>
+      <div class="radio-container">
+        <label>SOLTEIRO[A]?: </label>
+        <input type="radio" name="ESTADO_CIVIL" value="1" required="required"> Sim
+        <input type="radio" name="ESTADO_CIVIL" value="0" required="required"> Não
+      </div>
+      <div class="radio-container">
+        <label>ESCOLA PRIVADA?</label>
+        <input type="radio" name="FORMA_INGRESSO" value="1" required="required"> SIM
+        <input type="radio" name="FORMA_INGRESSO" value="0" required="required"> Não
+      </div>
+      <div class="radio-container">
+        <label>CARGA HORARIA PRATICA PROFISSIONAL PENDENTE?</label>
+        <input type="radio" name="CARGA_HORARIA_PROFISSIONAL_PENDENTE" value="1" required="required"> SIM
+        <input type="radio" name="CARGA_HORARIA_PROFISSIONAL_PENDENTE" value="0" required="required"> Não
+      </div>
+      <div class="radio-container">
+        <label>CARGA HORARIA SEMINARIO PENDENTE?</label>
+        <input type="radio" name="CARGA_HORARIA_SEMINARIO_PENDENTE" value="1" required="required"> SIM
+        <input type="radio" name="CARGA_HORARIA_SEMINARIO_PENDENTE" value="0" required="required"> Não
+      </div>
+      <button type="submit" class="btnSubmit">Classificar</button>
+      <button type="button" id="clearButton" class="btnSubmit" onclick="clearForm()">Limpar</button><div id="res">{{ prediction_text }}</div>
+      
+    </form>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    function clearForm() {
+      $('input[type="radio"]').prop('checked', false);
+      $("#result").html('');
+    }
+  </script>
+</body>
+</html>
+
